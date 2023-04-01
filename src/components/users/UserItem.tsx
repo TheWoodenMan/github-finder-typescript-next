@@ -1,14 +1,11 @@
 import React from "react";
-
-import Image from "next/image";
-import { UserItemPropTypes } from "./UserResults";
+import { UserItemPropTypes } from "./UserItemTypes";
 import Link from "next/link";
 import github_mark from "src/components/layout/assets/github-mark.png";
 
 const UserItem: React.FC<UserItemPropTypes> = ({
 	user: { login, avatar_url }
 }) => {
-	console.log(github_mark);
 	return (
 		<div className="card shadow-md compact side bg-base-100">
 			<div className="flex-row items-center space-x-4 card-body">
