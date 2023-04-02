@@ -7,12 +7,12 @@ import { GithubProviderProps } from "./GithubContextTypes";
 
 import github_mark from "src/components/layout/assets/github-mark.png";
 
-const GithubContext = createContext<GithubContextProps | undefined>(undefined);
+const GithubContext = createContext<GithubContextProps | null>(null);
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL;
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
-export const GithubProvider = ({ children }: GithubProviderProps) => {
+export const GithubProvider: React.FC = ({ children }: GithubProviderProps) => {
 	const initialState = {
 		users: [
 			{

@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { User } from "@/components/users/UserResultsTypes";
 
-export type GithubContextProps = {
+export interface GithubContextProps {
 	users: User[] | undefined;
 	loading: boolean | undefined;
 	searchUsers: (text: string) => Promise<void>;
 	clearUsers: () => void;
-};
+}
 
-export type GithubProviderProps = {
+export interface GithubProviderProps {
 	children?: ReactNode | undefined;
-};
+}

@@ -5,7 +5,10 @@ import GithubContext from "@/context/github/GithubContext";
 const UserSearch = () => {
 	const [text, setText] = useState("");
 
-	const { users, searchUsers, clearUsers } = useContext(GithubContext);
+	const githubSearchContext = useContext(GithubContext);
+
+	if (githubSearchContext == null) return <div>No Context Found</div>;
+	const { users, searchUsers, clearUsers } = githubSearchContext;
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setText(e.target.value);
@@ -43,7 +46,7 @@ const UserSearch = () => {
 					</div>
 				</form>
 			</div>
-			{users.length > 0 && (
+			{users && users.length > 0 && (
 				<div>
 					<button onClick={clearUsers} className="btn btn-ghost btn-lg">
 						Clear
