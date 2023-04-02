@@ -1,8 +1,7 @@
 import { createContext, useReducer } from "react";
 import githubReducer from "./GithubReducer";
 
-import { text } from "stream/consumers";
-import { ActionType } from "./GithubReducer";
+import { ActionType } from "./GithubReducerTypes";
 import { GithubContextProps } from "./GithubContextTypes";
 import { GithubProviderProps } from "./GithubContextTypes";
 
@@ -29,8 +28,6 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 		githubReducer,
 		initialState
 	);
-	// const [users, setUsers] = useState<User[]>([]);
-	// const [loading, setLoading] = useState(true);
 
 	const searchUsers = async (text: string) => {
 		setLoading();
@@ -39,14 +36,11 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 			q: text
 		});
 
-		const response = await fetch(
-			`${GITHUB_URL}/search/users?${params} in:name`,
-			{
-				headers: {
-					Authorization: `${GITHUB_TOKEN}`
-				}
+		const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
+			headers: {
+				Authorization: `${GITHUB_TOKEN}`
 			}
-		);
+		});
 		const { items } = await response.json();
 
 		dispatch({
@@ -55,11 +49,18 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 		});
 	};
 
+	const clearUsers = () => dispatch({ type: "CLEAR_USERS" });
+
 	const setLoading = () => dispatch({ type: "SET_LOADING" });
 
 	return (
 		<GithubContext.Provider
-			value={{ users: state.users, loading: state.loading, searchUsers }}
+			value={{
+				users: state.users,
+				loading: state.loading,
+				searchUsers,
+				clearUsers
+			}}
 		>
 			{children}
 		</GithubContext.Provider>

@@ -2,9 +2,10 @@ import { ReactNode } from "react";
 import { User } from "@/components/users/UserResultsTypes";
 
 export type GithubContextProps = {
-	users?: User[] | {}[] | undefined;
-	loading?: boolean | undefined;
+	users: User[] | undefined;
+	loading: boolean | undefined;
 	searchUsers: (text: string) => Promise<void>;
+	clearUsers: () => void;
 };
 
 export type GithubProviderProps = {
