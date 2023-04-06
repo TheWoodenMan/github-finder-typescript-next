@@ -1,8 +1,8 @@
 import github_mark from "src/components/layout/assets/github-mark.png";
-import { ActionType } from "./GithubReducerTypes";
+import { GithubActionType } from "./GithubReducerTypes";
 const placeholder_url: string = github_mark.src;
 
-const githubReducer = (state: any, action: ActionType) => {
+const githubReducer = (state: any, action: GithubActionType) => {
 	// state is any for now, update when better defined
 	switch (action.type) {
 		case "GET_USERS":

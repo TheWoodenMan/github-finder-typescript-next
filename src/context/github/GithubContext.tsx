@@ -1,18 +1,17 @@
 import { createContext, useReducer } from "react";
 import githubReducer from "./GithubReducer";
-
-import { ActionType } from "./GithubReducerTypes";
-import { GithubContextProps } from "./GithubContextTypes";
+import { GithubContextType } from "./GithubContextTypes";
 import { GithubProviderProps } from "./GithubContextTypes";
+import { GithubActionType } from "./GithubReducerTypes";
 
 import github_mark from "src/components/layout/assets/github-mark.png";
 
-const GithubContext = createContext<GithubContextProps | null>(null);
+const GithubContext = createContext<GithubContextType | null>(null);
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL;
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
-export const GithubProvider: React.FC = ({ children }: GithubProviderProps) => {
+export const GithubProvider = ({ children }: GithubProviderProps) => {
 	const initialState = {
 		users: [
 			{
@@ -24,10 +23,9 @@ export const GithubProvider: React.FC = ({ children }: GithubProviderProps) => {
 		loading: false
 	};
 
-	const [state, dispatch] = useReducer<(state: any, action: ActionType) => any>(
-		githubReducer,
-		initialState
-	);
+	const [state, dispatch] = useReducer<
+		(state: any, action: GithubActionType) => any
+	>(githubReducer, initialState);
 
 	const searchUsers = async (text: string) => {
 		setLoading();

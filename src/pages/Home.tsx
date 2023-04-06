@@ -5,7 +5,7 @@ import UserSearch from "@/components/users/UserSearch";
 
 const Home = () => {
 	return (
-		<Page title="Home">
+		<Page title="">
 			<UserSearch />
 			<UserResults />
 		</Page>
