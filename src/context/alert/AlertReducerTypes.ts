@@ -1,5 +1,3 @@
-// import { User } from "../../components/users/UserResultsTypes";
-
 import { AlertType } from "@/components/layout/AlertTypes";
 
 export type AlertActionType =

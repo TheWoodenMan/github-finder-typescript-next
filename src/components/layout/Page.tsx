@@ -7,7 +7,7 @@ import { AlertType } from "./AlertTypes";
 import { useContext } from "react";
 
 type PageProps = {
-	title: string;
+	title: string | string[] | undefined;
 	children: JSX.Element | JSX.Element[];
 };
 
