@@ -1,7 +1,6 @@
 import React from "react";
 import { UserItemPropTypes } from "./UserItemTypes";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import github_mark from "src/components/layout/assets/github-mark.png";
 
 const UserItem: React.FC<UserItemPropTypes> = ({
@@ -49,6 +48,7 @@ const UserItem: React.FC<UserItemPropTypes> = ({
 					<abbr
 						className="text-base-content text-opacity-40"
 						onClick={handleClick}
+						style={{ cursor: "pointer" }}
 					>
 						Visit Profile
 					</abbr>

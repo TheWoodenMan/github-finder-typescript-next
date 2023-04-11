@@ -4,7 +4,7 @@ import { User } from "@/components/users/UserResultsTypes";
 export interface GithubContextType {
 	users: User[] | undefined;
 	loading: boolean | undefined;
-	user: User | undefined;
+	user: User;
 	searchUsers: (text: string) => Promise<void>;
 	getUser: (login: string) => Promise<void>;
 	clearUsers: () => void;

@@ -1,17 +1,17 @@
 export interface User {
-	login: string | null;
-	id: number | null;
-	avatar_url: string | null;
-	name?: string | null;
-	type?: string | null;
-	location?: string | null;
-	bio?: string | null;
-	blog?: string | null;
-	twitter_username?: string | null;
-	html_url?: string | null;
-	followers?: number | null;
-	following?: number | null;
-	public_repos?: number | null;
-	public_gists?: number | null;
-	hireable: boolean | null;
+	login: string;
+	id: number;
+	avatar_url: string;
+	name?: string;
+	type?: string;
+	location?: string;
+	bio?: string;
+	blog?: string;
+	twitter_username?: string;
+	html_url?: string;
+	followers?: number;
+	following?: number;
+	public_repos?: number;
+	public_gists?: number;
+	hireable?: boolean;
 }

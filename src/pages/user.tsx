@@ -9,7 +9,14 @@ import GithubContext from "@/context/github/GithubContext";
 
 const User = () => {
 	const router = useRouter();
-	const { pid } = router.query;
+	let query = router.query;
+
+	// Narrowing: If it's an array, take the first element, if it's undefined or null, take a default empty value
+	const pid: string = Array.isArray(query.pid)
+		? query.pid[0]
+		: query.pid
+		? query.pid
+		: "";
 
 	useEffect(() => {
 		getUser(pid);
@@ -17,6 +24,7 @@ const User = () => {
 
 	const githubUserContext = useContext(GithubContext);
 
+	// If no context, display a message
 	if (githubUserContext == null) return <div>No Context Found</div>;
 	const { getUser, user, loading } = githubUserContext;
 
@@ -124,7 +132,7 @@ const User = () => {
 					<div className="w-full py-5 mb-6 rounded-lg shadow-md bg-base-100 stats">
 						<div className="stat">
 							<div className="stat-figure text-secondary">
-								<FaUsers className="text-3xl md: text-5xl" />
+								<FaUsers className="text-3xl md:text-5xl" />
 							</div>
 							<div className="stat-title pr-5">Followers:</div>
 							<div className="stat-value pr-5 text-3xl md:text-4xl">
@@ -133,7 +141,7 @@ const User = () => {
 						</div>
 						<div className="stat">
 							<div className="stat-figure text-secondary">
-								<FaUserFriends className="text-3xl md: text-5xl" />
+								<FaUserFriends className="text-3xl md:text-5xl" />
 							</div>
 							<div className="stat-title pr-5">Following:</div>
 							<div className="stat-value pr-5 text-3xl md:text-4xl">
@@ -142,7 +150,7 @@ const User = () => {
 						</div>
 						<div className="stat">
 							<div className="stat-figure text-secondary">
-								<FaCodepen className="text-3xl md: text-5xl" />
+								<FaCodepen className="text-3xl md:text-5xl" />
 							</div>
 							<div className="stat-title pr-5">Public Repos:</div>
 							<div className="stat-value pr-5 text-3xl md:text-4xl">
@@ -151,7 +159,7 @@ const User = () => {
 						</div>
 						<div className="stat">
 							<div className="stat-figure text-secondary">
-								<FaStore className="text-3xl md: text-5xl" />
+								<FaStore className="text-3xl md:text-5xl" />
 							</div>
 							<div className="stat-title pr-5">Public Gists:</div>
 							<div className="stat-value pr-5 text-3xl md:text-4xl">
