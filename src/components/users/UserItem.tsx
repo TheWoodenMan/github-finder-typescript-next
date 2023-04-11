@@ -45,13 +45,13 @@ const UserItem: React.FC<UserItemPropTypes> = ({
 				</div>
 				<div>
 					<h2 className="card-title">{login || "GitHub User"}</h2>
-					<abbr
+					<a
 						className="text-base-content text-opacity-40"
 						onClick={handleClick}
 						style={{ cursor: "pointer" }}
 					>
 						Visit Profile
-					</abbr>
+					</a>
 				</div>
 			</div>
 		</div>

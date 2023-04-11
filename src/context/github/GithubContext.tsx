@@ -21,6 +21,18 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 			}
 		],
 		user: {},
+		repos: [
+			{
+				name: "Github Repo",
+				description: "Placeholder",
+				id: 1,
+				html_url: "#",
+				forks: 1,
+				open_issues: 1,
+				watchers_count: 1,
+				stargazers_count: 1
+			}
+		],
 		loading: false
 	};
 
@@ -28,6 +40,7 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 		(state: any, action: GithubActionType) => any
 	>(githubReducer, initialState);
 
+	// search for a range of users based on text input
 	const searchUsers = async (text: string) => {
 		setLoading();
 
@@ -67,6 +80,31 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 			});
 		}
 	};
+
+	// get search results for target user repos
+	const getUserRepos = async (login: string) => {
+		setLoading();
+
+		const params = new URLSearchParams({
+			sort: "created",
+			per_page: "10"
+		});
+
+		const response = await fetch(
+			`${GITHUB_URL}/users/${login}/repos?${params}`,
+			{
+				headers: {
+					Authorization: `${GITHUB_TOKEN}`
+				}
+			}
+		);
+		const data = await response.json();
+
+		dispatch({
+			type: "GET_REPOS",
+			payload: data
+		});
+	};
 	const clearUsers = () => dispatch({ type: "CLEAR_USERS" });
 
 	const setLoading = () => dispatch({ type: "SET_LOADING" });
@@ -77,8 +115,10 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 				users: state.users,
 				loading: state.loading,
 				user: state.user,
+				repos: state.repos,
 				searchUsers,
 				getUser,
+				getUserRepos,
 				clearUsers
 			}}
 		>

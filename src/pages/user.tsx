@@ -5,6 +5,7 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { useRouter } from "next/router";
 import Page from "@/components/layout/Page";
+import RepoList from "@/components/repos/RepoList";
 import GithubContext from "@/context/github/GithubContext";
 
 const User = () => {
@@ -20,13 +21,14 @@ const User = () => {
 
 	useEffect(() => {
 		getUser(pid);
+		getUserRepos(pid);
 	}, []);
 
 	const githubUserContext = useContext(GithubContext);
 
 	// If no context, display a message
 	if (githubUserContext == null) return <div>No Context Found</div>;
-	const { getUser, user, loading } = githubUserContext;
+	const { getUser, user, loading, getUserRepos, repos } = githubUserContext;
 
 	const {
 		name,
@@ -167,6 +169,7 @@ const User = () => {
 							</div>
 						</div>
 					</div>
+					<RepoList repos={repos} />
 				</div>
 			</>
 		</Page>
