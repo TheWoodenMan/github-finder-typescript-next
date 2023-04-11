@@ -7,7 +7,7 @@ import { FaHome } from "react-icons/fa";
 const NotFound = () => {
 	return (
 		<div className="flex flex-col justify-between h-screen">
-			<Navbar heading="Github Finder" />
+			<Navbar navTitle="Github Finder" />
 			<div className="hero">
 				<div className="text-center hero-content">
 					<div className="max-w-lg">

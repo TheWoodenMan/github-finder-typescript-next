@@ -1,10 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-
-interface NavbarProps {
-	navTitle: string;
-}
+import { NavbarProps } from "./NavbarTypes";
 
 const Navbar: React.FC<NavbarProps> = ({ navTitle }) => {
 	return (
