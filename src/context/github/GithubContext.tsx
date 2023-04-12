@@ -4,8 +4,6 @@ import { GithubContextType } from "./GithubContextTypes";
 import { GithubProviderProps } from "./GithubContextTypes";
 import { GithubActionType } from "./GithubReducerTypes";
 
-import github_mark from "src/components/layout/assets/github-mark.png";
-
 const GithubContext = createContext<GithubContextType | null>(null);
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL;
@@ -13,51 +11,15 @@ const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }: GithubProviderProps) => {
 	const initialState = {
-		users: [
-			{
-
-			}
-		],
+		users: [{}],
 		user: {},
-		repos: [
-			{
-				name: "Github Repo",
-				description: "Placeholder",
-				id: 1,
-				html_url: "#",
-				forks: 1,
-				open_issues: 1,
-				watchers_count: 1,
-				stargazers_count: 1
-			}
-		],
+		repos: [{}],
 		loading: false
 	};
 
 	const [state, dispatch] = useReducer<
 		(state: any, action: GithubActionType) => any
 	>(githubReducer, initialState);
-
-	// search for a range of users based on text input
-	const searchUsers = async (text: string) => {
-		setLoading();
-
-		const params = new URLSearchParams({
-			q: text
-		});
-
-		const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-			headers: {
-				Authorization: `${GITHUB_TOKEN}`
-			}
-		});
-		const { items } = await response.json();
-
-		dispatch({
-			type: "GET_USERS",
-			payload: items
-		});
-	};
 
 	// get a single user
 	const getUser = async (login: string) => {
@@ -110,11 +72,8 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 	return (
 		<GithubContext.Provider
 			value={{
-				users: state.users,
-				loading: state.loading,
-				user: state.user,
-				repos: state.repos,
-				searchUsers,
+				...state,
+				dispatch,
 				getUser,
 				getUserRepos,
 				clearUsers

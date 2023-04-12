@@ -22,6 +22,7 @@ const User = () => {
 	useEffect(() => {
 		getUser(pid);
 		getUserRepos(pid);
+		// esline-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const githubUserContext = useContext(GithubContext);

@@ -7,11 +7,13 @@ export interface GithubContextType {
 	loading: boolean | undefined;
 	user: User;
 	repos: Repo[];
-	searchUsers: (text: string) => Promise<void>;
+	dispatch: Dispatch;
 	getUser: (login: string) => Promise<void>;
 	getUserRepos: (login: string) => Promise<void>;
 	clearUsers: () => void;
 }
+
+export type Dispatch = (obj: { type: string; payload?: any }) => void;
 
 export interface GithubProviderProps {
 	children: ReactNode;

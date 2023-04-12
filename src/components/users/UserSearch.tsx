@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import GithubContext from "@/context/github/GithubContext";
 import AlertContext from "@/context/alert/AlertContext";
+import { searchUsers } from "@/context/github/GithubActions";
 
 const UserSearch = () => {
 	const [text, setText] = useState("");
@@ -9,7 +10,7 @@ const UserSearch = () => {
 	const alertSearchContext = useContext(AlertContext);
 
 	if (githubSearchContext == null) return <div>No Context Found</div>;
-	const { users, searchUsers, clearUsers } = githubSearchContext;
+	const { users, dispatch, clearUsers } = githubSearchContext;
 
 	if (alertSearchContext == null) return <></>;
 	const { setAlert } = alertSearchContext;
@@ -17,12 +18,14 @@ const UserSearch = () => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setText(e.target.value);
 
-	const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (text === "") {
 			setAlert("please enter some text", "error");
 		} else {
-			searchUsers(text);
+			dispatch({ type: "SET_LOADING" });
+			const users = await searchUsers(text);
+			dispatch({ type: "GET_USERS", payload: users });
 			setText("");
 		}
 	};
