@@ -15,9 +15,7 @@ export const GithubProvider = ({ children }: GithubProviderProps) => {
 	const initialState = {
 		users: [
 			{
-				login: "Github User",
-				id: 0,
-				avatar_url: github_mark.src
+
 			}
 		],
 		user: {},
