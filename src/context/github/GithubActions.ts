@@ -1,6 +1,4 @@
 import axios from "axios";
-import AlertContext from "../alert/AlertContext";
-import { useContext } from "react";
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL;
 const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;

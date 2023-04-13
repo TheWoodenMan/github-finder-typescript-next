@@ -16,15 +16,14 @@ const Page: React.FC<PageProps> = ({ title, children }) => {
 	const alert = alertContextType!.alert || false;
 
 	return (
-		<div>
+		<React.Fragment>
 			<Navbar navTitle="Github Finder" />
 			<main className="container mx-auto px-3 pb-12">
 				{alert && <Alert />}
-				<h1>{title}</h1>
 				{children}
 			</main>
 			<Footer />
-		</div>
+		</React.Fragment>
 	);
 };
 export default Page;
