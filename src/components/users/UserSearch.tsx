@@ -10,7 +10,7 @@ const UserSearch = () => {
 	const alertSearchContext = useContext(AlertContext);
 
 	if (githubSearchContext == null) return <div>No Context Found</div>;
-	const { users, dispatch, clearUsers } = githubSearchContext;
+	const { users, dispatch } = githubSearchContext;
 
 	if (alertSearchContext == null) return <></>;
 	const { setAlert } = alertSearchContext;
@@ -55,7 +55,10 @@ const UserSearch = () => {
 			</div>
 			{users && users.length > 0 && (
 				<div>
-					<button onClick={clearUsers} className="btn btn-ghost btn-lg">
+					<button
+						onClick={() => dispatch({ type: "CLEAR_USERS" })}
+						className="btn btn-ghost btn-lg"
+					>
 						Clear
 					</button>
 				</div>

@@ -4,9 +4,11 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Page from "@/components/layout/Page";
 import RepoList from "@/components/repos/RepoList";
 import GithubContext from "@/context/github/GithubContext";
+import { getUserAndRepos } from "@/context/github/GithubActions";
 
 const User = () => {
 	const router = useRouter();
@@ -19,17 +21,21 @@ const User = () => {
 		? query.pid
 		: "";
 
-	useEffect(() => {
-		getUser(pid);
-		getUserRepos(pid);
-		// esline-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const githubUserContext = useContext(GithubContext);
 
 	// If no context, display a message
 	if (githubUserContext == null) return <div>No Context Found</div>;
-	const { getUser, user, loading, getUserRepos, repos } = githubUserContext;
+	const { user, loading, repos, dispatch } = githubUserContext;
+
+	useEffect(() => {
+		dispatch({ type: "SET_LOADING" });
+		const getUserData = async () => {
+			const userData = await getUserAndRepos(pid);
+			dispatch({ type: "GET_USER_AND_REPOS", payload: userData });
+		};
+
+		getUserData();
+	}, [dispatch, pid]);
 
 	const {
 		name,
@@ -65,7 +71,21 @@ const User = () => {
 						<div className="custom-card-image mb-6 md:mb-0">
 							<div className="rounded-lg shadow-xl card image-full">
 								<figure>
-									<img src={avatar_url} alt={login} />
+									<div
+										style={{
+											width: "100%",
+											height: "100%",
+											position: "relative"
+										}}
+									>
+										<Image
+											loader={() => avatar_url}
+											alt={login}
+											src={avatar_url}
+											width={400}
+											height={400}
+										/>
+									</div>
 								</figure>
 								<div className="justify-end card-body">
 									<h2 className="card-title mb-0">{name}</h2>
