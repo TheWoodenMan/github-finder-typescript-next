@@ -1,6 +1,6 @@
 # Github Finder App - React / TypeScript / Next.js
 
-a React app adapted from the excellent React Front to Back Course by ![Brad Traversy](https://www.traversymedia.com/)
+a React app adapted from the excellent React Front to Back Course by [Brad Traversy](https://www.traversymedia.com/)
 
 The app provides a clean and simple UI for searching Github Users, showing their stats and repos.
 
