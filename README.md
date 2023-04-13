@@ -1,10 +1,12 @@
 # Github Finder App - React / TypeScript / Next.js
 
-a React app adapted from the excellent React Front to Back Course by ![Brad Traversy](https://www.traversymedia.com/)
+a React app adapted from the excellent React Front to Back Course by [Brad Traversy](https://www.traversymedia.com/)
 
 The app provides a clean and simple UI for searching Github Users, showing their stats and repos.
 
 Accessible live here: https://github-finder-typescript-next.vercel.app/
+
+<img width="1265" alt="image" src="https://user-images.githubusercontent.com/85075266/231850032-6075d49c-9ea2-44ea-bb14-cb33782104f1.png">
 
 # How It's Made:
 
@@ -52,7 +54,7 @@ When I refactored to use Axios instead of fetch, it worked perfectly but I notic
 
 ### Optimizations
 
-I made the effort to incorporate <Image /> for the main avatar on each user page, It was fiddly to setup, (next needs a loader callback to pass the image url or it complains)
+I made the effort to incorporate <code>< Image / ></code> for the main avatar on each user page, It was fiddly to setup, (next needs a loader callback to pass the image url or it complains)
 
 I added in error handling to the Reducer Actions which call axios, for security but also for user experience. I used the setAlert function to pass this data to React to make it more elegant for users.
 
