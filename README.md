@@ -54,7 +54,7 @@ When I refactored to use Axios instead of fetch, it worked perfectly but I notic
 
 ### Optimizations
 
-I made the effort to incorporate <Image /> for the main avatar on each user page, It was fiddly to setup, (next needs a loader callback to pass the image url or it complains)
+I made the effort to incorporate <code><Image /></code> for the main avatar on each user page, It was fiddly to setup, (next needs a loader callback to pass the image url or it complains)
 
 I added in error handling to the Reducer Actions which call axios, for security but also for user experience. I used the setAlert function to pass this data to React to make it more elegant for users.
 
