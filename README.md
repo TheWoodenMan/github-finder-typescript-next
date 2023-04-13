@@ -6,6 +6,8 @@ The app provides a clean and simple UI for searching Github Users, showing their
 
 Accessible live here: https://github-finder-typescript-next.vercel.app/
 
+<img width="1265" alt="image" src="https://user-images.githubusercontent.com/85075266/231850032-6075d49c-9ea2-44ea-bb14-cb33782104f1.png">
+
 # How It's Made:
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
