@@ -42,7 +42,7 @@ const UserSearch = () => {
 							<input
 								type="text"
 								className="w-full pr-40 bg-gray-200 input input-lg text-black"
-								placeholder="Search"
+								placeholder="Search for a user"
 								value={text}
 								onChange={handleChange}
 							/>
