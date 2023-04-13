@@ -12,7 +12,7 @@ const UserSearch = () => {
 	if (githubSearchContext == null) return <div>No Context Found</div>;
 	const { users, dispatch } = githubSearchContext;
 
-	if (alertSearchContext == null) return <></>;
+	if (alertSearchContext == null) return <>No Alerts Found</>;
 	const { setAlert } = alertSearchContext;
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -24,7 +24,10 @@ const UserSearch = () => {
 			setAlert("please enter some text", "error");
 		} else {
 			dispatch({ type: "SET_LOADING" });
-			const users = await searchUsers(text);
+			const users = await searchUsers(text).catch((err) => {
+				setAlert(err.message, "error");
+				throw new Error(err.name);
+			});
 			dispatch({ type: "GET_USERS", payload: users });
 			setText("");
 		}

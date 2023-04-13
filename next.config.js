@@ -3,7 +3,8 @@ const nextConfig = {
 	reactStrictMode: true,
 	images: {
 		formats: ["image/avif", "image/webp"],
-		domains: ["localhost", "github-finder-typescript-next.vercel.app"]
+		domains: ["localhost", "github-finder-typescript-next.vercel.app"],
+		unoptimized: true
 	}
 };
 

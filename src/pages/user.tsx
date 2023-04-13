@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useMemo } from "react";
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
@@ -8,11 +8,14 @@ import Image from "next/image";
 import Page from "@/components/layout/Page";
 import RepoList from "@/components/repos/RepoList";
 import GithubContext from "@/context/github/GithubContext";
+import AlertContext from "@/context/alert/AlertContext";
 import { getUserAndRepos } from "@/context/github/GithubActions";
 
 const User = () => {
 	const router = useRouter();
 	let query = router.query;
+
+	const alertCtx = useContext(AlertContext);
 
 	// Narrowing: If it's an array, take the first element, if it's undefined or null, take a default empty value
 	const pid: string = Array.isArray(query.pid)
@@ -21,21 +24,22 @@ const User = () => {
 		? query.pid
 		: "";
 
-	const githubUserContext = useContext(GithubContext);
-
-	// If no context, display a message
-	if (githubUserContext == null) return <div>No Context Found</div>;
-	const { user, loading, repos, dispatch } = githubUserContext;
+	const githubCtx = useContext(GithubContext);
 
 	useEffect(() => {
-		dispatch({ type: "SET_LOADING" });
+		githubCtx!.dispatch({ type: "SET_LOADING" });
 		const getUserData = async () => {
 			const userData = await getUserAndRepos(pid);
-			dispatch({ type: "GET_USER_AND_REPOS", payload: userData });
+			githubCtx!.dispatch({ type: "GET_USER_AND_REPOS", payload: userData });
 		};
 
-		getUserData();
-	}, [dispatch, pid]);
+		getUserData().catch((err) => {
+			alertCtx!.setAlert(err.message, "error");
+			if (err.status === "404") throw new Error(err.name);
+		});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pid]);
 
 	const {
 		name,
@@ -52,9 +56,9 @@ const User = () => {
 		public_repos,
 		public_gists,
 		hireable
-	} = user;
+	} = githubCtx!.user;
 
-	if (loading) {
+	if (githubCtx!.loading) {
 		return <Spinner />;
 	}
 
@@ -78,13 +82,16 @@ const User = () => {
 											position: "relative"
 										}}
 									>
-										<Image
-											loader={() => avatar_url}
-											alt={login}
-											src={avatar_url}
-											width={400}
-											height={400}
-										/>
+										{avatar_url && (
+											<Image
+												loader={() => avatar_url}
+												alt={login}
+												src={avatar_url}
+												width={500}
+												height={500}
+												priority
+											/>
+										)}
 									</div>
 								</figure>
 								<div className="justify-end card-body">
@@ -190,7 +197,7 @@ const User = () => {
 							</div>
 						</div>
 					</div>
-					<RepoList repos={repos} />
+					<RepoList repos={githubCtx!.repos} />
 				</div>
 			</>
 		</Page>

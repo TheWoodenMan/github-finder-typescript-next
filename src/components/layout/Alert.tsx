@@ -6,7 +6,7 @@ const Alert: React.FC = () => {
 	const alertContextType = useContext(AlertContext);
 	const alert = alertContextType!.alert || { type: "", msg: "" };
 	return (
-		<p
+		<div
 			className={
 				alert.type === "error"
 					? "flex items-start mb-4 space-x-2 alert alert-warning shadow-lg text-base-300"
@@ -30,7 +30,7 @@ const Alert: React.FC = () => {
 			<p className="flex-1 text-base font-semibold leading-7 text-neutral-focus">
 				<strong>{alert.msg}</strong>
 			</p>
-		</p>
+		</div>
 	);
 };
 

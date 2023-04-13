@@ -3,14 +3,11 @@ import { User } from "@/components/users/UserResultsTypes";
 import { Repo } from "@/components/repos/RepoItemTypes";
 
 export interface GithubContextType {
-	users: User[] | undefined;
-	loading: boolean | undefined;
+	users: User[];
+	loading: boolean;
 	user: User;
 	repos: Repo[];
 	dispatch: Dispatch;
-	getUser: (login: string) => Promise<void>;
-	getUserRepos: (login: string) => Promise<void>;
-	clearUsers: () => void;
 }
 
 export type Dispatch = (obj: { type: string; payload?: any }) => void;

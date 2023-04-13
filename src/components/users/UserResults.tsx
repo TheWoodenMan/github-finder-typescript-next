@@ -14,10 +14,8 @@ const UserResults: React.FC = () => {
 	if (!loading) {
 		return (
 			<div className="grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
-				{users &&
-					users.map((user: User, i: number) => (
-						<UserItem user={user} key={user.id || i} />
-					))}
+				{users[0].login &&
+					users.map((user: User) => <UserItem user={user} key={user.id} />)}
 			</div>
 		);
 	} else {
