@@ -14,7 +14,13 @@ export const searchUsers = async (text: string) => {
 		q: text
 	});
 	const response = await github.get(`/search/users?${params}`);
-	return response.data.items;
+
+	if (response.status === 200 || response.status === 304) {
+		return response.data.items;
+	} else {
+		return 
+	}
+	
 };
 
 // get a single user and repos
